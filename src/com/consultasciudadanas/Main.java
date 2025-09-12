@@ -8,6 +8,32 @@ public class Main {
         List<Ciudadano> ciudadanos = new ArrayList<>();
         List<Consulta> consultas = new ArrayList<>();
 
+        // ======================
+        // DATOS INICIALES
+        // ======================
+        Ciudadano c1 = new Ciudadano("12345678", "Juan Pérez", "Santiago", 35);
+        Ciudadano c2 = new Ciudadano("87654321", "Ana Ruiz", "Valparaíso", 28);
+        ciudadanos.add(c1);
+        ciudadanos.add(c2);
+
+        Consulta cons1 = new Consulta(1, "Consulta Transporte", "2025-08-31");
+        Tema tema1 = new Tema(1, "Transporte Público");
+        Tema tema2 = new Tema(2, "Transporte Privado");
+
+        Pregunta p1 = new Pregunta(1, "¿Está satisfecho con el transporte público?");
+        Pregunta p2 = new Pregunta(2, "¿Usa transporte público diariamente?");
+        Pregunta p3 = new Pregunta(3, "¿Usa transporte privado frecuentemente?");
+
+        tema1.agregarPregunta(p1);
+        tema1.agregarPregunta(p2);
+        tema2.agregarPregunta(p3);
+
+        cons1.agregarTema(tema1);
+        cons1.agregarTema(tema2);
+
+        consultas.add(cons1);
+        // ======================
+
         try {
             while (true) {
                 System.out.println("\n--- MENÚ ---");
@@ -24,50 +50,48 @@ public class Main {
                 if (op == 0) break;
 
                 switch (op) {
-                case 1:
-                	
-                    String rut = "";
-                    while (true) {
-                        System.out.print("RUT (solo números, si termina en K se convertirá en 0): ");
-                        rut = sc.nextLine().trim().toUpperCase();
+                    case 1:
+                        String rut = "";
+                        while (true) {
+                            System.out.print("RUT (solo números, si termina en K se convertirá en 0): ");
+                            rut = sc.nextLine().trim().toUpperCase();
 
-                        if (rut.endsWith("K")) {
-                            rut = rut.substring(0, rut.length() - 1) + "0";
-                        }
-
-                        if (rut.matches("\\d+")) {
-                            break; 
-                        } else {
-                            System.out.println("RUT inválido. Solo números o K al final permitido.");
-                        }
-                    }
-
-                    System.out.print("Nombre: ");
-                    String nombre = sc.nextLine();
-                    System.out.print("Comuna: ");
-                    String comuna = sc.nextLine();
-
-                    int edad = 0;
-                    while (true) {
-                        System.out.print("Edad: ");
-                        try {
-                            edad = sc.nextInt();
-                            if (edad < 0) {
-                                System.out.println("Ingrese una edad válida.");
-                                continue;
+                            if (rut.endsWith("K")) {
+                                rut = rut.substring(0, rut.length() - 1) + "0";
                             }
-                            sc.nextLine();
-                            break; 
-                        } catch (InputMismatchException e) {
-                            System.out.println("Error: debe ingresar un número entero.");
-                            sc.nextLine();
+
+                            if (rut.matches("\\d+")) {
+                                break; 
+                            } else {
+                                System.out.println("RUT inválido. Solo números o K al final permitido.");
+                            }
                         }
-                    }
 
-                    ciudadanos.add(new Ciudadano(rut, nombre, comuna, edad));
-                    System.out.println("Ciudadano registrado correctamente.");
-                    break;
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+                        System.out.print("Comuna: ");
+                        String comuna = sc.nextLine();
 
+                        int edad = 0;
+                        while (true) {
+                            System.out.print("Edad: ");
+                            try {
+                                edad = sc.nextInt();
+                                if (edad < 0) {
+                                    System.out.println("Ingrese una edad válida.");
+                                    continue;
+                                }
+                                sc.nextLine();
+                                break; 
+                            } catch (InputMismatchException e) {
+                                System.out.println("Error: debe ingresar un número entero.");
+                                sc.nextLine();
+                            }
+                        }
+
+                        ciudadanos.add(new Ciudadano(rut, nombre, comuna, edad));
+                        System.out.println("Ciudadano registrado correctamente.");
+                        break;
 
                     case 2:
                         System.out.print("ID Consulta: ");
@@ -100,6 +124,7 @@ public class Main {
                             }
                         }
                         break;
+
                     case 3:
                         if (consultas.isEmpty() || ciudadanos.isEmpty()) {
                             System.out.println("Debe existir al menos un ciudadano y una consulta.");
@@ -124,6 +149,7 @@ public class Main {
                             }
                         }
                         break;
+
                     case 4:
                         if (consultas.isEmpty()) {
                             System.out.println("No existen consultas registradas.");
@@ -156,7 +182,12 @@ public class Main {
                         } else if (ciudadanos.isEmpty()) {
                             System.out.println("No existen ciudadanos registrados.");
                         } else {
-                            System.out.println("Votantes y consultas:");
+                            System.out.println("Ciudadanos registrados:");
+                            for (Ciudadano ciu : ciudadanos) {
+                                System.out.println(" - " + ciu);
+                            }
+
+                            System.out.println("\nCiudadanos y consultas:");
                             for (Consulta con : consultas) {
                                 System.out.println("Consulta: " + con.getTitulo());
                                 boolean tieneVotos = false;
