@@ -61,7 +61,7 @@ public class Main {
                             }
 
                             if (rut.matches("\\d+")) {
-                                break; 
+                                break;
                             } else {
                                 System.out.println("RUT inválido. Solo números o K al final permitido.");
                             }
@@ -82,7 +82,7 @@ public class Main {
                                     continue;
                                 }
                                 sc.nextLine();
-                                break; 
+                                break;
                             } catch (InputMismatchException e) {
                                 System.out.println("Error: debe ingresar un número entero.");
                                 sc.nextLine();
@@ -141,8 +141,8 @@ public class Main {
                         int co = sc.nextInt()-1; sc.nextLine();
                         Consulta cons = consultas.get(co);
 
-                        for (Tema tema : cons.getTemas()) {
-                            for (Pregunta p : tema.getPreguntas()) {
+                        for (Tema tema : cons.getTemas().values()) {
+                            for (Pregunta p : tema.getPreguntas().values()) {
                                 System.out.println(p.getEnunciado() + " (SÍ/NO): ");
                                 String resp = sc.nextLine();
                                 p.agregarVoto(new Voto(ciudadanos.get(ci), resp));
@@ -157,9 +157,9 @@ public class Main {
                             for (Consulta con : consultas) {
                                 System.out.println("Consulta: " + con.getTitulo());
                                 boolean tieneVotos = false;
-                                for (Tema tema : con.getTemas()) {
+                                for (Tema tema : con.getTemas().values()) {
                                     System.out.println("  Tema: " + tema.getNombre());
-                                    for (Pregunta p : tema.getPreguntas()) {
+                                    for (Pregunta p : tema.getPreguntas().values()) {
                                         System.out.println("    Pregunta: " + p.getEnunciado());
                                         if (p.getVotos().isEmpty()) {
                                             System.out.println("      No hay votos aún.");
@@ -191,9 +191,9 @@ public class Main {
                             for (Consulta con : consultas) {
                                 System.out.println("Consulta: " + con.getTitulo());
                                 boolean tieneVotos = false;
-                                for (Tema tema : con.getTemas()) {
+                                for (Tema tema : con.getTemas().values()) {
                                     System.out.println("  Tema: " + tema.getNombre());
-                                    for (Pregunta p : tema.getPreguntas()) {
+                                    for (Pregunta p : tema.getPreguntas().values()) {
                                         System.out.println("    Pregunta: " + p.getEnunciado());
                                         if (p.getVotos().isEmpty()) {
                                             System.out.println("      No hay votos aún.");
@@ -219,3 +219,4 @@ public class Main {
         }
     }
 }
+

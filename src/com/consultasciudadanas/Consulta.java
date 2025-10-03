@@ -1,28 +1,33 @@
 package com.consultasciudadanas;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Consulta {
     private int id;
     private String titulo;
     private String fecha;
-    private List<Tema> temas;
+    private Map<String, Tema> temas; 
 
     public Consulta(int id, String titulo, String fecha) {
         this.id = id;
         this.titulo = titulo;
         this.fecha = fecha;
-        this.temas = new ArrayList<>();
+        this.temas = new HashMap<>();
     }
 
     public int getId() { return id; }
     public String getTitulo() { return titulo; }
     public String getFecha() { return fecha; }
-    public List<Tema> getTemas() { return temas; }
+    public Map<String, Tema> getTemas() { return temas; }
 
-    public void agregarTema(Tema tema) {
-        temas.add(tema);
+    public boolean agregarTema(Tema tema) {
+        if (temas.containsKey(tema.getNombre())) {
+            System.out.println("⚠️ Tema duplicado: " + tema.getNombre());
+            return false;
+        }
+        temas.put(tema.getNombre(), tema);
+        return true;
     }
 
     @Override
