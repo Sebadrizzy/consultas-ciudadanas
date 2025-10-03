@@ -22,10 +22,7 @@ public class Main {
                     gestorCiudadanos.mostrarCiudadanos();
                     break;
                 case 3:
-                    gestorConsultas.crearConsulta();
-                    break;
-                case 4:
-                    gestorConsultas.mostrarConsultas();
+                    menuConsultas(gestorConsultas, sc);
                     break;
                 case 0:
                     System.out.println("👋 Saliendo del sistema...");
@@ -39,14 +36,60 @@ public class Main {
         sc.close();
     }
 
+    // ===== MENÚS =====
+
     private static void mostrarMenu() {
         System.out.println("\n=== MENÚ PRINCIPAL ===");
         System.out.println("1. Crear ciudadano");
         System.out.println("2. Mostrar ciudadanos");
-        System.out.println("3. Crear consulta");
-        System.out.println("4. Mostrar consultas");
+        System.out.println("3. Gestionar consultas");
         System.out.println("0. Salir");
     }
+
+    private static void menuConsultas(GestorConsultas gestorConsultas, Scanner sc) {
+        int opcion;
+        do {
+            System.out.println("\n=== MENÚ CONSULTAS ===");
+            System.out.println("1. Crear consulta");
+            System.out.println("2. Mostrar consultas");
+            System.out.println("3. Agregar tema a consulta");
+            System.out.println("4. Listar temas de una consulta");
+            System.out.println("5. Agregar pregunta a un tema");
+            System.out.println("6. Listar preguntas de un tema");
+            System.out.println("0. Volver al menú principal");
+
+            opcion = leerEntero("Ingrese una opción: ", sc);
+
+            switch (opcion) {
+                case 1:
+                    gestorConsultas.crearConsulta();
+                    break;
+                case 2:
+                    gestorConsultas.mostrarConsultas();
+                    break;
+                case 3:
+                    gestorConsultas.agregarTemaAConsulta();
+                    break;
+                case 4:
+                    gestorConsultas.listarTemasDeConsulta();
+                    break;
+                case 5:
+                    gestorConsultas.agregarPreguntaATema();
+                    break;
+                case 6:
+                    gestorConsultas.listarPreguntasDeTema();
+                    break;
+                case 0:
+                    System.out.println("🔙 Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("⚠️ Opción inválida");
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ===== UTIL =====
 
     private static int leerEntero(String mensaje, Scanner sc) {
         while (true) {
