@@ -33,6 +33,94 @@ public class GestorConsultas {
         }
     }
 
+    public Consulta buscarConsulta(int id) {
+        return consultas.get(id);
+    }
+
+    public void agregarTemaAConsulta() {
+        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        Consulta consulta = buscarConsulta(idConsulta);
+        if (consulta == null) {
+            System.out.println("⚠️ Consulta no encontrada.");
+            return;
+        }
+
+        int idTema = leerEntero("Ingrese ID del tema: ");
+        System.out.print("Ingrese nombre del tema: ");
+        String nombre = sc.nextLine().trim();
+
+        Tema tema = new Tema(idTema, nombre);
+        if (consulta.agregarTema(tema)) {
+            System.out.println("✅ Tema agregado a la consulta.");
+        }
+    }
+
+    public void listarTemasDeConsulta() {
+        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        Consulta consulta = buscarConsulta(idConsulta);
+        if (consulta == null) {
+            System.out.println("⚠️ Consulta no encontrada.");
+            return;
+        }
+
+        if (consulta.getTemas().isEmpty()) {
+            System.out.println("⚠️ No hay temas en esta consulta.");
+        } else {
+            consulta.getTemas().values().forEach(System.out::println);
+        }
+    }
+
+    // ======== PREGUNTAS ========
+
+    public void agregarPreguntaATema() {
+        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        Consulta consulta = buscarConsulta(idConsulta);
+        if (consulta == null) {
+            System.out.println("⚠️ Consulta no encontrada.");
+            return;
+        }
+
+        System.out.print("Ingrese nombre del tema: ");
+        String nombreTema = sc.nextLine().trim();
+        Tema tema = consulta.getTemas().get(nombreTema);
+        if (tema == null) {
+            System.out.println("⚠️ Tema no encontrado en esta consulta.");
+            return;
+        }
+
+        int idPregunta = leerEntero("Ingrese ID de la pregunta: ");
+        System.out.print("Ingrese enunciado de la pregunta: ");
+        String enunciado = sc.nextLine().trim();
+
+        Pregunta pregunta = new Pregunta(idPregunta, enunciado);
+        if (tema.agregarPregunta(pregunta)) {
+            System.out.println("✅ Pregunta agregada al tema.");
+        }
+    }
+
+    public void listarPreguntasDeTema() {
+        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        Consulta consulta = buscarConsulta(idConsulta);
+        if (consulta == null) {
+            System.out.println("⚠️ Consulta no encontrada.");
+            return;
+        }
+
+        System.out.print("Ingrese nombre del tema: ");
+        String nombreTema = sc.nextLine().trim();
+        Tema tema = consulta.getTemas().get(nombreTema);
+        if (tema == null) {
+            System.out.println("⚠️ Tema no encontrado en esta consulta.");
+            return;
+        }
+
+        if (tema.getPreguntas().isEmpty()) {
+            System.out.println("⚠️ No hay preguntas en este tema.");
+        } else {
+            tema.getPreguntas().values().forEach(System.out::println);
+        }
+    }
+
     private int leerEntero(String mensaje) {
         while (true) {
             try {
