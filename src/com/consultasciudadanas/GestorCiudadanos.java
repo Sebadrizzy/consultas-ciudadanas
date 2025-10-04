@@ -44,6 +44,10 @@ public class GestorCiudadanos {
         }
     }
 
+    public Ciudadano buscarCiudadano(String rut) {
+        return ciudadanos.get(rut);
+    }
+
     // ✅ método auxiliar para validar enteros
     private int leerEntero(String mensaje) {
         while (true) {
