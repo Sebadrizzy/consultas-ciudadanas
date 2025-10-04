@@ -36,16 +36,15 @@ public class GestorConsultas {
     }
 
     public void agregarTemaAConsulta() {
-        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        int idConsulta = Validar.leerEntero("Ingrese ID de la consulta: ");
         Consulta consulta = buscarConsulta(idConsulta);
         if (consulta == null) {
             System.out.println("Consulta no encontrada.");
             return;
         }
 
-        int idTema = leerEntero("Ingrese ID del tema: ");
-        System.out.print("Ingrese nombre del tema: ");
-        String nombre = sc.nextLine().trim();
+        int idTema = Validar.leerEntero("Ingrese ID del tema: ");
+        String nombre = Validar.leerNoVacio("Ingrese nombre del tema: ", sc);
 
         Tema tema = new Tema(idTema, nombre);
         if (consulta.agregarTema(tema)) {
@@ -54,7 +53,7 @@ public class GestorConsultas {
     }
 
     public void listarTemasDeConsulta() {
-        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        int idConsulta = Validar.leerEntero("Ingrese ID de la consulta: ");
         Consulta consulta = buscarConsulta(idConsulta);
         if (consulta == null) {
             System.out.println("Consulta no encontrada.");
@@ -71,24 +70,22 @@ public class GestorConsultas {
     // ======== PREGUNTAS ========
 
     public void agregarPreguntaATema() {
-        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        int idConsulta = Validar.leerEntero("Ingrese ID de la consulta: ");
         Consulta consulta = buscarConsulta(idConsulta);
         if (consulta == null) {
             System.out.println("Consulta no encontrada.");
             return;
         }
 
-        System.out.print("Ingrese nombre del tema: ");
-        String nombreTema = sc.nextLine().trim();
+        String nombre = Validar.leerNoVacio("Ingrese nombre del tema: ", sc);
         Tema tema = consulta.getTemas().get(nombreTema);
         if (tema == null) {
             System.out.println("Tema no encontrado en esta consulta.");
             return;
         }
 
-        int idPregunta = leerEntero("Ingrese ID de la pregunta: ");
-        System.out.print("Ingrese enunciado de la pregunta: ");
-        String enunciado = sc.nextLine().trim();
+        int idPregunta = Validar.leerEntero("Ingrese ID de la pregunta: ");
+        String enunciado = Validar.leerNoVacio("Ingrese enunciado de la pregunta: ", sc);
 
         Pregunta pregunta = new Pregunta(idPregunta, enunciado);
         if (tema.agregarPregunta(pregunta)) {
@@ -97,15 +94,14 @@ public class GestorConsultas {
     }
 
     public void listarPreguntasDeTema() {
-        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        int idConsulta = Validar.leerEntero("Ingrese ID de la consulta: ");
         Consulta consulta = buscarConsulta(idConsulta);
         if (consulta == null) {
             System.out.println("Consulta no encontrada.");
             return;
         }
 
-        System.out.print("Ingrese nombre del tema: ");
-        String nombreTema = sc.nextLine().trim();
+        String nombre = Validar.leerNoVacio("Ingrese nombre del tema: ", sc);
         Tema tema = consulta.getTemas().get(nombreTema);
         if (tema == null) {
             System.out.println("Tema no encontrado en esta consulta.");
@@ -130,7 +126,7 @@ public class GestorConsultas {
         }
 
         // Buscar consulta
-        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        int idConsulta = Validar.leerEntero("Ingrese ID de la consulta: ");
         Consulta consulta = buscarConsulta(idConsulta);
         if (consulta == null) {
             System.out.println("Consulta no encontrada.");
@@ -138,8 +134,7 @@ public class GestorConsultas {
         }
 
         // Buscar tema
-        System.out.print("Ingrese nombre del tema: ");
-        String nombreTema = sc.nextLine().trim();
+        String nombreTema = Validar.leerNoVacio("Ingrese nombre del tema: ", sc);
         Tema tema = consulta.getTemas().get(nombreTema);
         if (tema == null) {
             System.out.println("Tema no encontrado en esta consulta.");
@@ -147,8 +142,7 @@ public class GestorConsultas {
         }
 
         // Buscar pregunta
-        System.out.print("Ingrese enunciado de la pregunta: ");
-        String enunciado = sc.nextLine().trim();
+        String enunciado = Validar.leerNoVacio("Ingrese enunciado de la pregunta: ", sc);
         Pregunta pregunta = tema.getPreguntas().get(enunciado);
         if (pregunta == null) {
             System.out.println("Pregunta no encontrada en este tema.");
@@ -156,8 +150,7 @@ public class GestorConsultas {
         }
 
         // Registrar voto
-        System.out.print("Ingrese su respuesta: ");
-        String respuesta = sc.nextLine().trim();
+        String respuesta = Validar.leerNoVacio("Ingrese su respuesta: ", sc);
         Voto voto = new Voto(ciudadano, respuesta);
         pregunta.agregarVoto(voto);
         System.out.println("Voto registrado correctamente.");
