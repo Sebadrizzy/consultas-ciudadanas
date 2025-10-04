@@ -16,20 +16,19 @@ public class GestorCiudadanos {
     public void crearCiudadano() {
         String rut;
         do {
-            System.out.print("Ingrese RUT (Debe tener de 7 a 9 caracteres sin guion, ej: 123456789): ");
+            System.out.print("Ingrese RUT (Debe tener de 8 a 9 caracteres sin guion, ej: 123456789): ");
             rut = sc.nextLine().trim();
-            if (rut.length() < 7 || rut.length() > 9) {
-                System.out.println("⚠️ El RUT debe tener de 7 a 9 caracteres.");
+            if (rut.length() < 8 || rut.length() > 9) {
+                System.out.println("El RUT debe tener de 8 a 9 caracteres.");
+            } else if (ciudadanos.containsKey(rut)) {
+                System.out.println("El RUT " + rut + " ya está registrado. Ingrese un RUT único.");
+                rut = "";
             }
-        } while (rut.length() < 7 || rut.length() > 9);
+        } while (rut.length() < 8 || rut.length() > 9);
 
-        System.out.print("Ingrese nombre: ");
-        String nombre = sc.nextLine().trim();
-
-        System.out.print("Ingrese comuna: ");
-        String comuna = sc.nextLine().trim();
-
-        int edad = leerEntero("Ingrese edad: ");
+        String nombre = Validar.leerNoVacio("Ingrese nombre: ", sc);
+        String comuna = Validar.leerNoVacio("Ingrese comuna: ", sc);
+        int edad = Validar.leerEntero("Ingrese edad: ", sc);
 
         Ciudadano c = new Ciudadano(rut, nombre, comuna, edad);
         ciudadanos.put(rut, c);
@@ -46,17 +45,5 @@ public class GestorCiudadanos {
 
     public Ciudadano buscarCiudadano(String rut) {
         return ciudadanos.get(rut);
-    }
-
-    // ✅ método auxiliar para validar enteros
-    private int leerEntero(String mensaje) {
-        while (true) {
-            try {
-                System.out.print(mensaje);
-                return Integer.parseInt(sc.nextLine().trim());
-            } catch (NumberFormatException e) {
-                System.out.println("⚠️ Debe ingresar un número válido.");
-            }
-        }
     }
 }
