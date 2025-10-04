@@ -121,6 +121,50 @@ public class GestorConsultas {
         }
     }
 
+    public void agregarVoto(GestorCiudadanos gestorCiudadanos) {
+        // Buscar ciudadano
+        System.out.print("Ingrese RUT del ciudadano: ");
+        String rut = sc.nextLine().trim();
+        Ciudadano ciudadano = gestorCiudadanos.buscarCiudadano(rut);
+        if (ciudadano == null) {
+            System.out.println("⚠️ No existe un ciudadano con ese RUT.");
+            return;
+        }
+
+        // Buscar consulta
+        int idConsulta = leerEntero("Ingrese ID de la consulta: ");
+        Consulta consulta = buscarConsulta(idConsulta);
+        if (consulta == null) {
+            System.out.println("⚠️ Consulta no encontrada.");
+            return;
+        }
+
+        // Buscar tema
+        System.out.print("Ingrese nombre del tema: ");
+        String nombreTema = sc.nextLine().trim();
+        Tema tema = consulta.getTemas().get(nombreTema);
+        if (tema == null) {
+            System.out.println("⚠️ Tema no encontrado en esta consulta.");
+            return;
+        }
+
+        // Buscar pregunta
+        System.out.print("Ingrese enunciado de la pregunta: ");
+        String enunciado = sc.nextLine().trim();
+        Pregunta pregunta = tema.getPreguntas().get(enunciado);
+        if (pregunta == null) {
+            System.out.println("⚠️ Pregunta no encontrada en este tema.");
+            return;
+        }
+
+        // Registrar voto
+        System.out.print("Ingrese su respuesta: ");
+        String respuesta = sc.nextLine().trim();
+        Voto voto = new Voto(ciudadano, respuesta);
+        pregunta.agregarVoto(voto);
+        System.out.println("✅ Voto registrado correctamente.");
+    }   
+
     private int leerEntero(String mensaje) {
         while (true) {
             try {
