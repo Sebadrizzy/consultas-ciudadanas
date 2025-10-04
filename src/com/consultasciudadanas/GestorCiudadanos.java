@@ -46,4 +46,9 @@ public class GestorCiudadanos {
     public Ciudadano buscarCiudadano(String rut) {
         return ciudadanos.get(rut);
     }
+
+    //Cargar ciudadanos de datos iniciales
+    public void agregarCiudadano(Ciudadano ciudadano) {
+        ciudadanos.put(ciudadano.getRut(), ciudadano);
+    }
 }
