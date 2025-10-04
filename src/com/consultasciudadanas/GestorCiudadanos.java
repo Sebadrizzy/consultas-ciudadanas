@@ -51,4 +51,10 @@ public class GestorCiudadanos {
     public void agregarCiudadano(Ciudadano ciudadano) {
         ciudadanos.put(ciudadano.getRut(), ciudadano);
     }
+
+
+    //Obtener ciudadanos
+    public Map<String, Ciudadano> getCiudadanos() {
+        return ciudadanos;
+    }
 }
