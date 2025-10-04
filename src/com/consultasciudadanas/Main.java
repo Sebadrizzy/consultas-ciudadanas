@@ -22,7 +22,7 @@ public class Main {
                     gestorCiudadanos.mostrarCiudadanos();
                     break;
                 case 3:
-                    menuConsultas(gestorConsultas, sc);
+                    menuConsultas(gestorConsultas, gestorCiudadanos, sc);
                     break;
                 case 0:
                     System.out.println("👋 Saliendo del sistema...");
@@ -46,7 +46,7 @@ public class Main {
         System.out.println("0. Salir");
     }
 
-    private static void menuConsultas(GestorConsultas gestorConsultas, Scanner sc) {
+    private static void menuConsultas(GestorConsultas gestorConsultas, GestorCiudadanos gestorCiudadanos, Scanner sc) {
         int opcion;
         do {
             System.out.println("\n=== MENÚ CONSULTAS ===");
@@ -56,6 +56,7 @@ public class Main {
             System.out.println("4. Listar temas de una consulta");
             System.out.println("5. Agregar pregunta a un tema");
             System.out.println("6. Listar preguntas de un tema");
+            System.out.println("7. Agregar votos a una pregunta");
             System.out.println("0. Volver al menú principal");
 
             opcion = leerEntero("Ingrese una opción: ", sc);
@@ -78,6 +79,9 @@ public class Main {
                     break;
                 case 6:
                     gestorConsultas.listarPreguntasDeTema();
+                    break;
+                case 7:
+                    gestorConsultas.agregarVoto(gestorCiudadanos);
                     break;
                 case 0:
                     System.out.println("🔙 Volviendo al menú principal...");
