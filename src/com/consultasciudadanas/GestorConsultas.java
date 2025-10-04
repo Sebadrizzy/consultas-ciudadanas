@@ -160,4 +160,10 @@ public class GestorConsultas {
     public void agregarConsulta(Consulta consulta) {
         consultas.put(consulta.getId(), consulta);
     }
+
+
+    //Conseguir consultas
+    public Map<Integer, Consulta> getConsultas() {
+        return consultas;
+    }
 }
