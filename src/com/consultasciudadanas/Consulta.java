@@ -30,6 +30,12 @@ public class Consulta {
         return true;
     }
 
+    // Sobrecarga: recibe solo id y nombre
+    public boolean agregarTema(int id, String nombre) {
+        Tema tema = new Tema(id, nombre);
+        return agregarTema(tema); // reutiliza el original
+    }
+
     @Override
     public String toString() {
         return "Consulta " + id + ": " + titulo + " (" + fecha + ")";
