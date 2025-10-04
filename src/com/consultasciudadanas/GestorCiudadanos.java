@@ -32,12 +32,12 @@ public class GestorCiudadanos {
 
         Ciudadano c = new Ciudadano(rut, nombre, comuna, edad);
         ciudadanos.put(rut, c);
-        System.out.println("✅ Ciudadano creado: " + c);
+        System.out.println("Ciudadano creado: " + c);
     }
 
     public void mostrarCiudadanos() {
         if (ciudadanos.isEmpty()) {
-            System.out.println("⚠️ No hay ciudadanos registrados.");
+            System.out.println("No hay ciudadanos registrados.");
         } else {
             ciudadanos.values().forEach(System.out::println);
         }
