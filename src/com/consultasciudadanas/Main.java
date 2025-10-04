@@ -12,6 +12,11 @@ public class Main {
         DatosIniciales datosIniciales = new DatosIniciales(gestorCiudadanos, gestorConsultas);
         datosIniciales.inicializarDatos();
 
+
+        // Inicializar persistencia
+        PersistenciaDatos persistencia = new PersistenciaDatos(gestorCiudadanos, gestorConsultas);
+        persistencia.cargarDatos();
+
         int opcion;
         do {
             mostrarMenu();
@@ -29,6 +34,7 @@ public class Main {
                     break;
                 case 0:
                     System.out.println("👋 Saliendo del sistema...");
+                    persistencia.guardarDatos();
                     break;
                 default:
                     System.out.println("⚠️ Opción inválida");
