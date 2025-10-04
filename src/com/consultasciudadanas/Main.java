@@ -9,6 +9,9 @@ public class Main {
         GestorCiudadanos gestorCiudadanos = new GestorCiudadanos(sc);
         GestorConsultas gestorConsultas = new GestorConsultas(sc);
 
+        DatosIniciales datosIniciales = new DatosIniciales(gestorCiudadanos, gestorConsultas);
+        datosIniciales.inicializarDatos();
+
         int opcion;
         do {
             mostrarMenu();
