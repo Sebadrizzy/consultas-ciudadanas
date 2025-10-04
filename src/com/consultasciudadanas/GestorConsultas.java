@@ -14,11 +14,9 @@ public class GestorConsultas {
     }
 
     public void crearConsulta() {
-        int id = leerEntero("Ingrese ID de la consulta: ");
-        System.out.print("Ingrese título: ");
-        String titulo = sc.nextLine().trim();
-        System.out.print("Ingrese fecha (dd-mm-aaaa): ");
-        String fecha = sc.nextLine().trim();
+        int id = Validar.leerEntero("Ingrese id de la consulta: ", sc);
+        String titulo = Validar.leerNoVacio("Ingrese titulo: ", sc);
+        String fecha = Validar.leerFechaValida("Ingrese fecha (dd-mm-aaaa): ", sc);
 
         Consulta consulta = new Consulta(id, titulo, fecha);
         consultas.put(id, consulta);
