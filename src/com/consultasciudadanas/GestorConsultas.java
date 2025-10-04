@@ -154,5 +154,10 @@ public class GestorConsultas {
         Voto voto = new Voto(ciudadano, respuesta);
         pregunta.agregarVoto(voto);
         System.out.println("Voto registrado correctamente.");
-    }   
+    } 
+
+    //Cargar consulta de datos iniciales
+    public void agregarConsulta(Consulta consulta) {
+        consultas.put(consulta.getId(), consulta);
+    }
 }
