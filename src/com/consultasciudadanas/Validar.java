@@ -3,6 +3,7 @@ package com.consultasciudadanas;
 import java.util.Scanner;
 
 public class Validar {
+
     public static String leerNoVacio(String mensaje, Scanner sc) {
         String valor;
         do {
@@ -10,9 +11,9 @@ public class Validar {
             valor = sc.nextLine().trim();
             if (valor.isEmpty()) {
                 System.out.println("El campo no puede estar vacío. Intente de nuevo.");
-            }else if(valor.length()>20 || valor.length()<3){
+            } else if (valor.length() > 20 || valor.length() < 3) {
                 System.out.println("El campo debe tener entre 3 y 20 caracteres. Intente de nuevo.");
-                valor="";
+                valor = "";
             }
         } while (valor.isEmpty());
         return valor;
